@@ -3624,7 +3624,7 @@ function refreshSelected() {
     } else {
         jQuery('#selected_nav_qnh').updateText(selected.nav_qnh.toFixed(1) + " hPa");
     }
-    jQuery('#selected_nav_altitude').hex_html(format_altitude_long(selected.nav_altitude, 0, DisplayUnits));
+    jQuery('#selected_nav_altitude').html(format_altitude_long(selected.nav_altitude, 0, DisplayUnits));
     jQuery('#selected_nav_heading').updateText(format_track_brief(selected.nav_heading));
     if (selected.nav_modes == null) {
         jQuery('#selected_nav_modes').updateText("n/a");
@@ -4316,6 +4316,9 @@ function refreshFeatures() {
                     if (newValue != plane.trCache[cell]) {
                         plane.trCache[cell] = newValue;
                         if (col.html) {
+                            plane.tr.cells[cell].innerHTML = newValue;
+                        }
+                        else {
                             plane.tr.cells[cell].innerHTML = newValue;
                         }
                     }

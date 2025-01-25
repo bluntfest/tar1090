@@ -6,8 +6,8 @@ let NNBSP='\u202f';
 let NUMSP='\u2007';
 let DEGREES='\u00b0'
 let ENDASH='\u2013';
-let UP_TRIANGLE='\u25b2'; // U+25B2 BLACK UP-POINTING TRIANGLE
-let DOWN_TRIANGLE='\u25bc'; // U+25BC BLACK DOWN-POINTING TRIANGLE
+let UP_TRIANGLE='<i class="bi bi-arrow-up"></i>'; // U+25B2 BLACK UP-POINTING TRIANGLE
+let DOWN_TRIANGLE='<i class="bi bi-arrow-down"></i>'; // U+25BC BLACK DOWN-POINTING TRIANGLE
 let EM_QUAD = '\u2001';
 
 let TrackDirections = ["North","NE","East","SE","South","SW","West","NW"];

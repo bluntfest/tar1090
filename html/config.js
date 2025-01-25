@@ -297,7 +297,7 @@ MapboxAPIKey = null;
 //squareMania = false;
 
 // Columns that have a // in front of them are shown.
-/* // remove this line to mofify columns (and the one at the end)
+ // remove this line to mofify columns (and the one at the end)
 HideCols = [
 	"#icao",
 //	"#country",
@@ -316,12 +316,12 @@ HideCols = [
 //	"#rssi",
 	"#lat",
 	"#lon",
-	"#data_source",
+//	"#data_source",
 	"#military",
     "#wd",
     "#ws",
 ]
-*/ // remove this line to modify columns (and the one at the start)
+ // remove this line to modify columns (and the one at the start)
 
 // show aircraft pictures
 // showPictures = true;

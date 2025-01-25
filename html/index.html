@@ -227,81 +227,44 @@
               Click on the trace line to start playback!
             </div>
           </div>
-          <div class="sectionTitle">
-            <div class="section-title-content">
-              SPATIAL
+          <!-- SPATIAL -->
+          <div class="card text-white border m-2 mb-4">
+            <div class="card-body p-2 bg-secondary rounded">
+              <div class="list-group list-group-flush">
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Groundpseed</p>
+                  <p id="selected_speed1">N/A</p>
+                </div>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Baro. Altitude</p>
+                  <p id="selected_altitude1">N/A</p>
+                </div>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">WGS84 Altitude</p>
+                  <p id="selected_altitude_geom1">N/A</p>
+                </div>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Vertical Rate</p>
+                  <p id="selected_vert_rate">N/A</p>
+                </div>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Track</p>
+                  <p id="selected_track1">N/A</p>
+                </div>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">GPS Coords</p>
+                  <p id="selected_position">N/A</p>
+                </div>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Distance from HQ</p>
+                  <p id="selected_sitedist2">N/A</p>
+                </div>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Receiver ID</p>
+                  <p id="receiver_id">N/A</p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div id=spatial_block class="infoBlockSection">
-            <table class="infoSectionTable">
-              <tr id=receiver_id_div class="infoBlockSection hidden">
-                <td>
-                  <span class="infoHeading" title="receiver id that supplied the position data">rId:</span>
-                  <span class="infoData" id="receiver_id">n/a</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="infoHeading" title="The speed of the aircraft over the ground.">Groundspeed:</span>
-                  <span class="infoData" id="selected_speed1">n/a</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="infoHeading" id="selected_altitude1_title" title="The uncorrected pressure-derived height of the aircraft above mean sea level (based on barometric pressure)">Baro. Altitude</span>:
-                  <span class="infoData" id="selected_altitude1"></span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="infoHeading" id="selected_altitude_geom1_title" title="The geometric GPS derived altitude referenced to WGS84 ellipsoid (or reference EGM96 when enabled in the settings)">WGS84 Altitude</span>:
-                  <span class="infoData" id="selected_altitude_geom1"></span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="infoHeading">
-                    <span title="Rate of climb or descent">Vert. Rate</span>:
-                  </div>
-                  <div class="infoData">
-                    <span id="selected_vert_rate">n/a</span>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div class="infoHeading">
-                    <span title="Direction the aircraft is traveling over the ground">Track</span>:
-                  </div>
-                  <div class="infoData">
-                    <span id="selected_track1">n/a</span>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="infoHeading">
-                    <span title="Latitude and longitude coordinates of the aircraft's last known position">Pos.:</span>
-                  </div>
-                  <div class="infoData">
-                    <span id="selected_position">n/a</span>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="infoHeading">
-                    <span title="Distance of the aircraft from your ADS-B site at its last known position">Distance</span>:
-                  </div>
-                  <div class="infoData">
-                    <span id="selected_sitedist2">n/a</span>
-                  </div>
-                </td>
-              </tr>
-
-
-            </table>
           </div>
               <!-- SPATIAL -->
 

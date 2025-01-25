@@ -3426,9 +3426,9 @@ function refreshSelected() {
 
     if (selected.rId && show_rId) {
         jQuery('#receiver_id').updateText(selected.rId);
-        jQuery('#receiver_id_div').removeClass('hidden');
+        //jQuery('#receiver_id_div').removeClass('hidden');
     } else {
-        jQuery('#receiver_id_div').addClass('hidden');
+        //jQuery('#receiver_id_div').addClass('hidden');
     }
 
 
@@ -4157,8 +4157,9 @@ function refreshFeatures() {
                 if (plane.dataSource) {
                     switch (plane.dataSource) {
                         case 'mlat':
-                            jQuery('#'+plane.icao).addClass('table-warning border border-warning');
+                            jQuery('#'+plane.icao).addClass('table-warning border');
                             if (plane.military) {
+                                jQuery('#'+plane.icao).removeClass('border-warning');
                                 jQuery('#'+plane.icao).addClass('border border-success border-4');
                             }
                             if (plane.squawk) {

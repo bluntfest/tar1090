@@ -186,7 +186,6 @@ let badDotMlat;
 
 let showingReplayBar = false;
 
-
 ///////////////////////////////////////////////////////////////////
 //Custom Shit
 let cpd = ['AC9C37', 'AC9C9F', 'AC9CAF', 'AC9CB1', 'AC9CB0'];
@@ -215,7 +214,6 @@ function check_for_warning(hex) {
         reg_warning = '';
     }
 }
-
 
 function processAircraft(ac, init, uat) {
     const isArray = Array.isArray(ac);
@@ -1720,7 +1718,7 @@ jQuery('#selected_altitude_geom1')
     TAR.altitudeChart.init();
 
     if (aggregator) {
-    /*    jQuery('#aggregator_header').show();
+     /*   jQuery('#aggregator_header').show();
         jQuery('#credits').show();
         if (!onMobile) {
             jQuery('#creditsSelected').show();
@@ -1731,7 +1729,7 @@ jQuery('#selected_altitude_geom1')
         if (inhibitIframe && window.self != window.top) {
             window.top.location.href = "https://www.aggregator.com/";
             return;
-        } */
+        }*/
     }
     if (imageConfigLink != "") {
         let host = window.location.hostname;
@@ -1749,7 +1747,7 @@ jQuery('#selected_altitude_geom1')
 }
 
 function initLegend(colors) {
-  /*  let html = '';
+    let html = '';
     html += '<div class="legendTitle" style="background-color:' + colors['adsb'] + ';">ADS-B</div>';
     if (!globeIndex)
         html += '<div class="legendTitle" style="background-color:' + colors['uat'] + ';">UAT / ADS-R</div>';
@@ -1765,12 +1763,12 @@ function initLegend(colors) {
     if (aiscatcher_server)
         html += '<div class="legendTitle" style="background-color:' + colors['ais'] + ';">AIS</div>';
 
-    document.getElementById('legend').innerHTML = html; */
+    //document.getElementById('legend').innerHTML = html;
 }
 
 function initSourceFilter(colors) {
     const createFilter = function (color, text, key) {
-        return '<li class="ui-widget-content' + color + '" id="source-filter-' + key + '">' + text + '</li>';
+        return '<li class="ui-widget-content' + color + '"id="source-filter-' + key + '">' + text + '</li>';
     };
 
     let html = '';
@@ -4153,10 +4151,9 @@ function refreshFeatures() {
                 let bgColor = '';
 
                 plane.selectCache = plane.selected;
-                
+
                 if (plane.dataSource && plane.dataSource in colors)
                     bgColor = colors[plane.dataSource];
-
                 if (plane.dataSource) {
                     switch (plane.dataSource) {
                         case 'mlat':
@@ -4270,6 +4267,15 @@ function refreshFeatures() {
                     }
                 }
 
+                if (plane.squawk in tableColors.special) {
+                    bgColor = tableColors.special[plane.squawk];
+                    plane.bgColorCache = bgColor;
+                    //plane.tr.style = "background-color: " + bgColor + "; color: black;";
+                } else if (plane.bgColorCache != bgColor) {
+                    plane.bgColorCache = bgColor;
+                    //plane.tr.style = "background-color: " + bgColor + ";";
+                }
+
                 if (plane.selected) {
                     colors = tableColors.selected;
                     jQuery('#'+plane.icao).removeClass('border');
@@ -4298,16 +4304,6 @@ function refreshFeatures() {
                     }
                 }
 
-
-                if (plane.squawk in tableColors.special) {
-                    bgColor = tableColors.special[plane.squawk];
-                    plane.bgColorCache = bgColor;
-                    //plane.tr.style = "background-color: " + bgColor + "; color: black;";
-                } else if (plane.bgColorCache != bgColor) {
-                    plane.bgColorCache = bgColor;
-                    //plane.tr.style = "background-color: " + bgColor + ";";
-                }
-
                 for (let cell in activeCols) {
                     let col = activeCols[cell];
                     if (!col.value)
@@ -4317,8 +4313,7 @@ function refreshFeatures() {
                         plane.trCache[cell] = newValue;
                         if (col.html) {
                             plane.tr.cells[cell].innerHTML = newValue;
-                        }
-                        else {
+                        } else {
                             plane.tr.cells[cell].innerHTML = newValue;
                         }
                     }

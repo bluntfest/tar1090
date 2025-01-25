@@ -1646,10 +1646,10 @@ jQuery('#selected_altitude_geom1')
             setState: function(state) {
                 useRouteAPI = state;
                 if (useRouteAPI) {
-                    jQuery('#routeRow').show();
+                    //jQuery('#routeRow').show();
                     jQuery('#routeRowHighlighted').show();
                 } else {
-                    jQuery('#routeRow').hide();
+                    //jQuery('#routeRow').hide();
                     jQuery('#routeRowHighlighted').hide();
                 }
             }
@@ -2053,7 +2053,7 @@ function setIntervalTimers() {
         trailReaper(now);
     }
     if (enable_pf_data && !pTracks && !globeIndex) {
-        jQuery('#pf_info_container').removeClass('hidden');
+        //jQuery('#pf_info_container').removeClass('hidden');
         timers.pf_data = window.setInterval(fetchPfData, RefreshInterval*10.314);
         fetchPfData();
     }
@@ -3199,7 +3199,7 @@ function refreshPageTitle() {
 function displaySil() {
     jQuery('#copyrightInfo').html("");
     if (!showSil) {
-        setPhotoHtml("");
+        setPhotoHtml("No aircraft photo available.");
         return;
     }
     let selected = SelectedPlane;
@@ -3402,12 +3402,12 @@ function refreshSelected() {
     if (selected.icaoType) {
         jQuery('#selected_icaotype').updateText(selected.icaoType);
     } else {
-        jQuery('#selected_icaotype').updateText("n/a");
+        jQuery('#selected_icaotype').updateText("N/A");
     }
     if (selected.typeDescription)
         jQuery('#selected_typedesc').updateText(selected.typeDescription);
     else
-        jQuery('#selected_typedesc').updateText("n/a");
+        jQuery('#selected_typedesc').updateText("N/A");
 
     let typeLine = "";
     if (selected.year)
@@ -3415,14 +3415,14 @@ function refreshSelected() {
     if (selected.typeLong)
         typeLine += selected.typeLong;
     if (!typeLine)
-        typeLine = "n/a"
+        typeLine = "N/A"
 
     jQuery('#selected_typelong').updateText(typeLine);
 
     if (selected.ownOp)
         jQuery('#selected_ownop').updateText(selected.ownOp);
     else
-        jQuery('#selected_ownop').updateText("");
+        jQuery('#selected_ownop').updateText("N/A");
 
     if (selected.rId && show_rId) {
         jQuery('#receiver_id').updateText(selected.rId);
@@ -3438,8 +3438,8 @@ function refreshSelected() {
     jQuery('#selected_onground').updateText(format_onground(selected.altitude));
 
     if (selected.squawk == null || selected.squawk == '0000') {
-        jQuery('#selected_squawk1').updateText('n/a');
-        jQuery('#selected_squawk2').updateText('n/a');
+        jQuery('#selected_squawk1').updateText('N/A');
+        jQuery('#selected_squawk2').updateText('N/A');
     } else {
         jQuery('#selected_squawk1').updateText(selected.squawk);
         jQuery('#selected_squawk2').updateText(selected.squawk);
@@ -3449,7 +3449,7 @@ function refreshSelected() {
         if (selected.routeString) {
             jQuery('#selected_route').updateText(selected.routeString);
         } else {
-            jQuery('#selected_route').updateText('n/a');
+            jQuery('#selected_route').updateText('N/A');
         }
     }
 
@@ -3462,7 +3462,7 @@ function refreshSelected() {
         magResult = geoMag(lat, lon, alt);
         jQuery('#selected_mag_declination').updateText(format_track_brief(magResult.dec));
     } else {
-        jQuery('#selected_mag_declination').updateText('n/a');
+        jQuery('#selected_mag_declination').updateText('N/A');
     }
 
     let heading = null;
@@ -3499,8 +3499,8 @@ function refreshSelected() {
         jQuery('#selected_wd').updateText(format_track_brief(wd, true));
         jQuery('#selected_ws').updateText(format_speed_long(ws, DisplayUnits));
     } else {
-        jQuery('#selected_wd').updateText('n/a');
-        jQuery('#selected_ws').updateText('n/a');
+        jQuery('#selected_wd').updateText('N/A');
+        jQuery('#selected_ws').updateText('N/A');
     }
 
 
@@ -3525,7 +3525,7 @@ function refreshSelected() {
     if (oat != null)
         jQuery('#selected_temp').updateText(Math.round(tat) + ' / ' + Math.round(oat)  + ' °C');
     else
-        jQuery('#selected_temp').updateText('n/a');
+        jQuery('#selected_temp').updateText('N/A');
 
     jQuery('#selected_speed1').updateText(format_speed_long(selected.gs, DisplayUnits));
     jQuery('#selected_speed2').updateText(format_speed_long(selected.gs, DisplayUnits));
@@ -3546,23 +3546,23 @@ function refreshSelected() {
     if (selected.seen != null && selected.seen < 1000000) {
         jQuery('#selected_seen').updateText(format_duration(selected.seen));
     } else {
-        jQuery('#selected_seen').updateText('n/a');
+        jQuery('#selected_seen').updateText('N/A');
     }
     if (selected.position_time != null) {
         jQuery('#selected_pos_epoch').updateText(Math.round(selected.position_time));
     } else {
-        jQuery('#selected_pos_epoch').updateText('n/a');
+        jQuery('#selected_pos_epoch').updateText('N/A');
     }
     if (selected.seen_pos != null && selected.seen_pos < 1000000) {
         jQuery('#selected_seen_pos').updateText(format_duration(selected.seen_pos));
     } else {
-        jQuery('#selected_seen_pos').updateText('n/a');
+        jQuery('#selected_seen_pos').updateText('N/A');
     }
 
     jQuery('#selected_country').updateText(selected.country.replace("special use", "special"));
 
     if (selected.position == null) {
-        jQuery('#selected_position').updateText('n/a');
+        jQuery('#selected_position').updateText('N/A');
     } else {
 
         if (selected.seen_pos > -1) {
@@ -3576,11 +3576,11 @@ function refreshSelected() {
         sitedist = ol.sphere.getDistance(SitePosition, selected.position);
     }
     jQuery('#selected_source').updateText(format_data_source(selected.dataSource));
-    jQuery('#selected_category').updateText(selected.category ? selected.category : "n/a");
+    jQuery('#selected_category').updateText(selected.category ? selected.category : "N/A");
     jQuery('#selected_category_label').updateText(get_category_label(selected.category));
     jQuery('#selected_sitedist1').updateText(format_distance_long(sitedist, DisplayUnits));
     jQuery('#selected_sitedist2').updateText(format_distance_long(sitedist, DisplayUnits));
-    jQuery('#selected_rssi1').updateText(selected.rssi != null ? selected.rssi.toFixed(1) : "n/a");
+    jQuery('#selected_rssi1').updateText(selected.rssi != null ? selected.rssi.toFixed(1) : "N/A");
     if (globeIndex && binCraft && !showTrace) {
         jQuery('#selected_message_count').prev().updateText('Receivers:');
         jQuery('#selected_message_count').prop('title', 'Number of receivers receiving this aircraft');
@@ -3594,43 +3594,43 @@ function refreshSelected() {
         jQuery('#selected_message_count').prop('title', 'The total number of messages received from this aircraft');
         jQuery('#selected_message_count').updateText(selected.messages);
     }
-    jQuery('#selected_message_rate').updateText((selected.messageRate != null) ? (selected.messageRate.toFixed(1)) : "n/a");
-    jQuery('#selected_photo_link').html(getPhotoLink(selected));
+    jQuery('#selected_message_rate').updateText((selected.messageRate != null) ? (selected.messageRate.toFixed(1)) : "N/A");
+    //jQuery('#selected_photo_link').html(getPhotoLink(selected));
 
     jQuery('#selected_altitude_geom1').html(format_altitude_long(adjust_geom_alt(selected.alt_geom, selected.position), selected.geom_rate, DisplayUnits));
     jQuery('#selected_altitude_geom2').html(format_altitude_long(adjust_geom_alt(selected.alt_geom, selected.position), selected.geom_rate, DisplayUnits));
     jQuery('#selected_ias').updateText(format_speed_long(selected.ias, DisplayUnits));
     jQuery('#selected_tas').updateText(format_speed_long(selected.tas, DisplayUnits));
     if (selected.mach == null) {
-        jQuery('#selected_mach').updateText('n/a');
+        jQuery('#selected_mach').updateText('N/A');
     } else {
         jQuery('#selected_mach').updateText(selected.mach.toFixed(3));
     }
     if (selected.roll == null) {
-        jQuery('#selected_roll').updateText('n/a');
+        jQuery('#selected_roll').updateText('N/A');
     } else {
         jQuery('#selected_roll').updateText(selected.roll.toFixed(1));
     }
     if (selected.track_rate == null) {
-        jQuery('#selected_trackrate').updateText('n/a');
+        jQuery('#selected_trackrate').updateText('N/A');
     } else {
         jQuery('#selected_trackrate').updateText(selected.track_rate.toFixed(2));
     }
     jQuery('#selected_geom_rate').updateText(format_vert_rate_long(selected.geom_rate, DisplayUnits));
     if (selected.nav_qnh == null) {
-        jQuery('#selected_nav_qnh').updateText("n/a");
+        jQuery('#selected_nav_qnh').updateText("N/A");
     } else {
         jQuery('#selected_nav_qnh').updateText(selected.nav_qnh.toFixed(1) + " hPa");
     }
     jQuery('#selected_nav_altitude').html(format_altitude_long(selected.nav_altitude, 0, DisplayUnits));
     jQuery('#selected_nav_heading').updateText(format_track_brief(selected.nav_heading));
     if (selected.nav_modes == null) {
-        jQuery('#selected_nav_modes').updateText("n/a");
+        jQuery('#selected_nav_modes').updateText("N/A");
     } else {
         jQuery('#selected_nav_modes').updateText(selected.nav_modes.join());
     }
     if (selected.nic_baro == null) {
-        jQuery('#selected_nic_baro').updateText("n/a");
+        jQuery('#selected_nic_baro').updateText("N/A");
     } else {
         if (selected.nic_baro == 1) {
             jQuery('#selected_nic_baro').updateText("cross-checked");
@@ -3642,7 +3642,7 @@ function refreshSelected() {
     jQuery('#selected_nac_p').updateText(format_nac_p(selected.nac_p));
     jQuery('#selected_nac_v').updateText(format_nac_v(selected.nac_v));
     if (selected.rc == null) {
-        jQuery('#selected_rc').updateText("n/a");
+        jQuery('#selected_rc').updateText("N/A");
     } else if (selected.rc == 0) {
         jQuery('#selected_rc').updateText("unknown");
     } else {
@@ -3650,7 +3650,7 @@ function refreshSelected() {
     }
 
     if (selected.sil == null || selected.sil_type == null) {
-        jQuery('#selected_sil').updateText("n/a");
+        jQuery('#selected_sil').updateText("N/A");
     } else {
         let sampleRate = "";
         let silDesc = "";
@@ -3674,7 +3674,7 @@ function refreshSelected() {
                 silDesc = "≤ 1e-7";
                 break;
             default:
-                silDesc = "n/a";
+                silDesc = "N/A";
                 sampleRate = "";
                 break;
         }
@@ -3749,14 +3749,14 @@ function refreshHighlighted() {
     if (highlighted.icaoType !== null) {
         jQuery('#highlighted_icaotype').text(highlighted.icaoType);
     } else {
-        jQuery('#highlighted_icaotype').text("n/a");
+        jQuery('#highlighted_icaotype').text("N/A");
     }
 
     if (useRouteAPI) {
         if (highlighted.routeString) {
             jQuery('#highlighted_route').updateText(highlighted.routeString);
         } else {
-            jQuery('#highlighted_route').updateText('n/a');
+            jQuery('#highlighted_route').updateText('N/A');
         }
     }
 
@@ -3765,7 +3765,7 @@ function refreshHighlighted() {
     if (highlighted.registration !== null) {
         jQuery('#highlighted_registration').text(highlighted.registration);
     } else {
-        jQuery('#highlighted_registration').text("n/a");
+        jQuery('#highlighted_registration').text("N/A");
     }
 
     jQuery('#highlighted_speed').text(format_speed_long(highlighted.gs, DisplayUnits));
@@ -3774,7 +3774,7 @@ function refreshHighlighted() {
 
     jQuery('#highlighted_pf_route').text((highlighted.pfRoute ? highlighted.pfRoute : highlighted.icao.toUpperCase()));
 
-    jQuery('#highlighted_rssi').text(highlighted.rssi != null ? highlighted.rssi.toFixed(1) + ' dBFS' : "n/a");
+    jQuery('#highlighted_rssi').text(highlighted.rssi != null ? highlighted.rssi.toFixed(1) + ' dBFS' : "N/A");
 }
 
 function removeHighlight() {
@@ -4324,7 +4324,7 @@ function refreshFeatures() {
 
         global.refreshPageTitle();
         jQuery('#dump1090_total_history').updateText(TrackedHistorySize.toLocaleString('en-US'));
-        jQuery('#dump1090_message_rate').updateText(MessageRate === null ? 'n/a' : MessageRate.toFixed(1));
+        jQuery('#dump1090_message_rate').updateText(MessageRate === null ? 'N/A' : MessageRate.toFixed(1));
         jQuery('#dump1090_total_ac').updateText(globeIndex ? globeTrackedAircraft : TrackedAircraft);
         jQuery('#dump1090_total_ac_positions').updateText(TrackedAircraftPositions);
 
@@ -4803,7 +4803,7 @@ function adjustInfoBlock() {
         //
         if (mapIsVisible && document.getElementById('map_canvas').clientWidth < parseFloat(jQuery('#selected_infoblock').css('width')) * 3) {
             jQuery('#selected_infoblock').css('height', '290px');
-            jQuery('#selected_typedesc').parent().parent().hide();
+            //jQuery('#selected_typedesc').parent().parent().hide();
             jQuery('#credits').css('bottom', '295px');
             jQuery('#credits').css('left', '5px');
         } else {
@@ -4826,7 +4826,7 @@ function adjustInfoBlock() {
         jQuery('#selected_infoblock').hide();
     }
 
-    let photoWidth = document.getElementById('photo_container').clientWidth;
+    /*let photoWidth = document.getElementById('photo_container').clientWidth;
     let refWidth = infoBlockWidth * globalScale - 29;
     if (Math.abs(photoWidth / refWidth - 1) > 0.05)
         photoWidth = refWidth;
@@ -4840,7 +4840,7 @@ function adjustInfoBlock() {
         } else {
             jQuery('#photo_container').css('height', '40px');
         }
-    }
+    }*/
 }
 
 function initializeUnitsSelector() {
@@ -8874,14 +8874,14 @@ function deleteTraces() {
 function setPictureVisibility() {
     showPictures = planespottersAPI || planespottingAPI;
     if (showPictures) {
-        jQuery('#photo_container').removeClass('hidden');
+        //jQuery('#photo_container').removeClass('hidden');
     } else {
-        jQuery('#photo_container').addClass('hidden');
+        //jQuery('#photo_container').addClass('hidden');
     }
     if (planespottersLinks && !showPictures) {
-        jQuery('#photoLinkRow').removeClass('hidden');
+        //jQuery('#photoLinkRow').removeClass('hidden');
     } else {
-        jQuery('#photoLinkRow').addClass('hidden');
+        //jQuery('#photoLinkRow').addClass('hidden');
     }
 }
 
@@ -8890,7 +8890,7 @@ let infoBits = {
     type: {
         head: 'Type:',
         title: '4 character ICAO type code (i.e.: A320,B738,G550)',
-        value: function(plane) { return plane.icaoType || 'n/a'; },
+        value: function(plane) { return plane.icaoType || 'N/A'; },
     },
 };
 

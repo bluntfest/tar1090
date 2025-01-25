@@ -82,9 +82,47 @@
             <div class="card-body p-2 bg-secondary rounded">
               <div class="h2 fw-bold mb-0" title="Callsign: Typically the air traffic control callsign or the aircraft's registration, as entered into the transponder by the pilot" id="selected_callsign">no call sign</div>
               <div id="selected_icao" title="ICAO hex ID: The aircraft's unique ICAO identification number shown in hexadecimal format as set in the aircrafts transponder (can be wrong, we will still display the data with the wrong hex)"></div>
-              <div class="mt-2" id="photo_container">
+              <div class="my-2" id="photo_container">
                 <div title="Aircraft Photo" id="selected_photo"></div>
                 <div id="copyrightInfo"></div>
+              </div>
+              <div class="list-group">
+                <div class="list-group-item bg-secondary text-white">
+                  <p class="m-0 p-0 fw-bold">Registration</p>
+                  <p id="selected_registration">N/A</p>
+                </div>
+                <div class="list-group-item bg-secondary text-white">
+                  <p class="m-0 p-0 fw-bold">Notes</p>
+                  <p id="selected_lookup">N/A</p>
+                </div>
+                <div class="list-group-item bg-secondary text-white">
+                  <p class="m-0 p-0 fw-bold">Country</p>
+                  <p id="selected_country">N/A</p>
+                </div>
+                <div class="list-group-item bg-secondary text-white">
+                  <p class="m-0 p-0 fw-bold">Type Designator</p>
+                  <p id="selected_icaotype">N/A</p>
+                </div>
+                <div class="list-group-item bg-secondary text-white">
+                  <p class="m-0 p-0 fw-bold">Aircraft Type</p>
+                  <p id="selected_typelong">N/A</p>
+                </div>
+                <div class="list-group-item bg-secondary text-white">
+                  <p class="m-0 p-0 fw-bold">Type Description</p>
+                  <p id="selected_typedesc">N/A</p>
+                </div>
+                <div class="list-group-item bg-secondary text-white">
+                  <p class="m-0 p-0 fw-bold">Owner</p>
+                  <p id="selected_ownop">N/A</p>
+                </div>
+                <div class="list-group-item bg-secondary text-white">
+                  <p class="m-0 p-0 fw-bold">Squawk</p>
+                  <p id="selected_squawk1">N/A</p>
+                </div>
+                <div class="list-group-item bg-secondary text-white">
+                  <p class="m-0 p-0 fw-bold">Route</p>
+                  <p id="selected_route">N/A</p>
+                </div>
               </div>
             </div>
           </div>
@@ -135,91 +173,6 @@
             <div class="infoHeading">
               <span><a class="link" target="_blank" href="https://en.wikipedia.org/wiki/Aviation_transponder_interrogation_modes#ICAO_24-bit_address" rel="noreferrer">What is a hex ID?</a></span>
             </div>
-          </div>
-          <div id=reg_info class="infoBlockSection">
-            <table class="infoSectionTable">
-              <tr id=pf_info_container class=>
-                <td>
-                  <div>
-                    <span class="identMedium" id="selected_pf_info"> </span>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="infoHeading">
-                    <span title="Registration: The alphanumeric registration code assigned by the country in which the aircraft is registered.">Reg.: </span>
-                  </div>
-                  <div class="infoData"><span id="selected_registration">n/a</span></div>
-                  <br>
-                  <div class="infoData"><span id="selected_lookup">n/a</span></div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="infoData">
-                    <span title="Country of registration" id="selected_country">n/a</span>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="infoHeading">
-                    <span title="Database flags (military / PIA / LAD)">DB flags: </span>
-                  </div>
-                  <div class="infoData"><span id="selected_dbFlags">n/a</span></div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="infoHeading" title="ICAO type code (A320/B738)">Type: </span>
-                  <span class="infoData" id="selected_icaotype"></span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="infoData" title="Year of Manufacture / Full Type" id="selected_typelong"></span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="infoData" title="" id="selected_ownop"></span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span class="infoHeading" title="ICAO type description (L/S/H Landplane/Seaplane/Helicopter 1/2/3/4 Number of P/T/J Reciprocating/Turboprop/Jet Engines">Type Desc.: </span>
-                  <span class="infoData" id="selected_typedesc"></span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="infoHeading">
-                    <span title="A 4-digit octal code assigned to the aircraft by Air Traffic Control">Squawk</span>:
-                  </div>
-                  <div class="infoData">
-                    <span id="selected_squawk1"></span>
-                  </div>
-                </td>
-              </tr>
-              <tr id="routeRow" class="hidden">
-                <td>
-                  <div class="infoHeading">
-                    <span title="Reported flight origin and destination according to adsbdb.com">Route</span>:
-                  </div>
-                  <div class="infoData">
-                    <span id="selected_route"></span>
-                  </div>
-                </td>
-              </tr>
-              <tr id="photoLinkRow" class="hidden">
-                <td>
-                  <div class="infoHeading">
-                    <span class="link" id="selected_photo_link"></span>
-                  </div>
-                </td>
-              </tr>
-            </table>
           </div>
           <button id="show_trace" type="button" class="greyButton">History</button>
           <div id="history_collapse" class="infoBlockSection" style="display: none">

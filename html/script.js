@@ -3199,7 +3199,7 @@ function refreshPageTitle() {
 function displaySil() {
     jQuery('#copyrightInfo').html("");
     if (!showSil) {
-        setPhotoHtml("No aircraft photo available.");
+        setPhotoHtml('<i class="bi bi-airplane h1"></i>');
         return;
     }
     let selected = SelectedPlane;

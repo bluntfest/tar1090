@@ -78,7 +78,7 @@
         <div id="infoblock_close" class="infoblockCloseBox"></div>
         <div id="infoblock-container">
 
-          <div class="card text-white border m-2">
+          <div class="card text-white border m-2 mb-4">
             <div class="card-body p-2 bg-secondary rounded">
               <div class="h2 fw-bold mb-0" title="Callsign: Typically the air traffic control callsign or the aircraft's registration, as entered into the transponder by the pilot" id="selected_callsign">no call sign</div>
               <div id="selected_icao" title="ICAO hex ID: The aircraft's unique ICAO identification number shown in hexadecimal format as set in the aircrafts transponder (can be wrong, we will still display the data with the wrong hex)"></div>
@@ -86,41 +86,45 @@
                 <div title="Aircraft Photo" id="selected_photo"></div>
                 <div id="copyrightInfo"></div>
               </div>
-              <div class="list-group">
-                <div class="list-group-item bg-secondary text-white">
-                  <p class="m-0 p-0 fw-bold">Registration</p>
+            </div>
+          </div>
+          <div class="card text-white border m-2 mb-4">
+            <div class="card-body p-2 bg-secondary rounded">
+              <div class="list-group list-group-flush">
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Registration</p>
                   <p id="selected_registration">N/A</p>
                 </div>
-                <div class="list-group-item bg-secondary text-white">
-                  <p class="m-0 p-0 fw-bold">Notes</p>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Notes</p>
                   <p id="selected_lookup">N/A</p>
                 </div>
-                <div class="list-group-item bg-secondary text-white">
-                  <p class="m-0 p-0 fw-bold">Country</p>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Country</p>
                   <p id="selected_country">N/A</p>
                 </div>
-                <div class="list-group-item bg-secondary text-white">
-                  <p class="m-0 p-0 fw-bold">Type Designator</p>
-                  <p id="selected_icaotype">N/A</p>
-                </div>
-                <div class="list-group-item bg-secondary text-white">
-                  <p class="m-0 p-0 fw-bold">Aircraft Type</p>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Aircraft Type</p>
                   <p id="selected_typelong">N/A</p>
                 </div>
-                <div class="list-group-item bg-secondary text-white">
-                  <p class="m-0 p-0 fw-bold">Type Description</p>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Type Designator</p>
+                  <p id="selected_icaotype">N/A</p>
+                </div>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Type Description</p>
                   <p id="selected_typedesc">N/A</p>
                 </div>
-                <div class="list-group-item bg-secondary text-white">
-                  <p class="m-0 p-0 fw-bold">Owner</p>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Owner</p>
                   <p id="selected_ownop">N/A</p>
                 </div>
-                <div class="list-group-item bg-secondary text-white">
-                  <p class="m-0 p-0 fw-bold">Squawk</p>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Squawk</p>
                   <p id="selected_squawk1">N/A</p>
                 </div>
-                <div class="list-group-item bg-secondary text-white">
-                  <p class="m-0 p-0 fw-bold">Route</p>
+                <div class="list-group-item p-0 bg-secondary text-white border-bottom-0">
+                  <p class="m-0 p-0 text-decoration-underline fw-bold">Route</p>
                   <p id="selected_route">N/A</p>
                 </div>
               </div>

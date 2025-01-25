@@ -100,7 +100,7 @@ let userScale = 1;
 let iconScale = 1;
 let labelScale = 1;
 let newWidth = lineWidth;
-let SiteOverride = false;
+let SiteOverride = (SiteLat != null && SiteLon != null);
 let onJumpInput = null;
 let labelFill = null;
 let blackFill = null;
@@ -148,7 +148,6 @@ const renderBuffer = 60;
 
 let shareLink = '';
 
-
 let CenterLat = 0;
 let CenterLon = 0;
 let zoomLvl = 5;
@@ -187,6 +186,7 @@ let badDotMlat;
 
 let showingReplayBar = false;
 
+
 ///////////////////////////////////////////////////////////////////
 //Custom Shit
 let cpd = ['AC9C37', 'AC9C9F', 'AC9CAF', 'AC9CB1', 'AC9CB0'];
@@ -215,6 +215,7 @@ function check_for_warning(hex) {
         reg_warning = '';
     }
 }
+
 
 function processAircraft(ac, init, uat) {
     const isArray = Array.isArray(ac);
@@ -537,6 +538,7 @@ function afterFirstFetch() {
             func();
         }
 
+
         geoMag = geoMagFactory(cof2Obj());
 
         db_load_type_cache().always(function() {
@@ -741,13 +743,10 @@ function initialize() {
                 trace_hist_only = true;
             if (receiverJson.json_trace_interval < 2)
                 traces_high_res = true;
-            if (receiverJson.lat != null) {
+            if (receiverJson.lat != null && !SiteOverride) {
                 //console.log("receiver.json lat: " + receiverJson.lat)
                 SiteLat = receiverJson.lat;
                 SiteLon = receiverJson.lon;
-                SitePosition = [SiteLon, SiteLat];
-                DefaultCenterLat = receiverJson.lat;
-                DefaultCenterLon = receiverJson.lon;
             }
             if (receiverJson.jaeroTimeout) {
                 jaeroTimeout = receiverJson.jaeroTimeout * 60;
@@ -759,6 +758,13 @@ function initialize() {
                 altitudeFilter = false;
             }
         }
+
+        if (SiteLat && SiteLon) {
+            SitePosition = [SiteLon, SiteLat];
+            DefaultCenterLat = SiteLat;
+            DefaultCenterLon = SiteLon;
+        }
+
         configureReceiver = null;
 
         // Initialize stuff
@@ -865,11 +871,9 @@ function initPage() {
         let lat = parseFloat(usp.get('SiteLat'));
         let lon = parseFloat(usp.get('SiteLon'));
         if (!isNaN(lat) && !isNaN(lon)) {
-            if (true || usp.has('SiteNosave')) {
-                SiteLat = CenterLat = DefaultCenterLat = lat;
-                SiteLon = CenterLon = DefaultCenterLon = lon;
-                SiteOverride = true;
-            }
+            SiteLat = CenterLat = DefaultCenterLat = lat;
+            SiteLon = CenterLon = DefaultCenterLon = lon;
+            SiteOverride = true;
             loStore['SiteLat'] = lat;
             loStore['SiteLon'] = lon;
         }
@@ -1716,7 +1720,18 @@ jQuery('#selected_altitude_geom1')
     TAR.altitudeChart.init();
 
     if (aggregator) {
+    /*    jQuery('#aggregator_header').show();
+        jQuery('#credits').show();
+        if (!onMobile) {
+            jQuery('#creditsSelected').show();
+        }
+        jQuery('#selected_infoblock').addClass('aggregator-selected-bg');
 
+        // activate to prevent iframe use
+        if (inhibitIframe && window.self != window.top) {
+            window.top.location.href = "https://www.aggregator.com/";
+            return;
+        } */
     }
     if (imageConfigLink != "") {
         let host = window.location.hostname;
@@ -1728,29 +1743,34 @@ jQuery('#selected_altitude_geom1')
 
 
     if (hideButtons) {
-        jQuery('#header_top').hide();
-        jQuery('#header_side').hide();
-        jQuery('#tabs').hide();
-        jQuery('#filterButton').hide();
-        jQuery('.ol-control').hide();
-        jQuery('.ol-attribution').show();
+        showHideButtons();
+        runAfterLoad(showHideButtons);
     }
 }
 
 function initLegend(colors) {
-    /*let html = '';
-    html += '<div class="legendTitle bg-dark text-light border">ADS-B</div>';
-    html += '<div class="legendTitle bg-success border border-success">UAT / ADS-R</div>';
-    html += '<div class="legendTitle bg-success border border-success">ADS-C/R / UAT</div>';
-    html += '<div class="legendTitle bg-warning border border-warning text-dark">MLAT</div>';
-    html += '<div class="legendTitle bg-primary border border-primary">Mode-S</div>';
-    html += '<div class="legendTitle bg-dark text-light border border-success border-4">Military</div>';
-    document.getElementById('legend').innerHTML = html;*/
+  /*  let html = '';
+    html += '<div class="legendTitle" style="background-color:' + colors['adsb'] + ';">ADS-B</div>';
+    if (!globeIndex)
+        html += '<div class="legendTitle" style="background-color:' + colors['uat'] + ';">UAT / ADS-R</div>';
+    if (globeIndex)
+        html += '<div class="legendTitle" style="background-color:' + colors['uat'] + ';">ADS-C/R / UAT</div>';
+    html += '<div class="legendTitle" style="background-color:' + colors['mlat'] + ';">MLAT</div>';
+    html += '<br>';
+    html += '<div class="legendTitle" style="background-color:' + colors['tisb'] + ';">TIS-B</div>';
+    if (!globeIndex)
+        html += '<div class="legendTitle" style="background-color:' + colors['modeS'] + ';">Mode-S</div>';
+    if (globeIndex)
+        html += '<div class="legendTitle" style="background-color:' + colors['other'] + ';">Other</div>';
+    if (aiscatcher_server)
+        html += '<div class="legendTitle" style="background-color:' + colors['ais'] + ';">AIS</div>';
+
+    document.getElementById('legend').innerHTML = html; */
 }
 
 function initSourceFilter(colors) {
     const createFilter = function (color, text, key) {
-        return '<li class="ui-widget-content' + color + '"id="source-filter-' + key + '">' + text + '</li>';
+        return '<li class="ui-widget-content' + color + '" id="source-filter-' + key + '">' + text + '</li>';
     };
 
     let html = '';
@@ -2651,6 +2671,25 @@ function initMapEarly() {
     });
 }
 
+function showHideButtons() {
+    if (hideButtons) {
+        jQuery('#header_top').hide();
+        jQuery('#header_side').hide();
+        jQuery('#splitter').hide();
+        jQuery('#tabs').hide();
+        jQuery('#filterButton').hide();
+        jQuery('.ol-zoom').hide();
+        jQuery('.layer-switcher').hide();
+    } else {
+        jQuery('#header_top').show();
+        jQuery('#header_side').show();
+        jQuery('#splitter').show();
+        jQuery('#tabs').show();
+        jQuery('#filterButton').show();
+        jQuery('.ol-zoom').show();
+        jQuery('.layer-switcher').show();
+    }
+}
 
 // Initalizes the map and starts up our timers to call various functions
 function initMap() {
@@ -2975,26 +3014,8 @@ function initMap() {
                 resetMap();
                 break;
             case "H":
-                if (!hideButtons) {
-                    jQuery('#header_top').hide();
-                    jQuery('#header_side').hide();
-                    jQuery('#splitter').hide();
-                    jQuery('#tabs').hide();
-                    jQuery('#filterButton').hide();
-                    jQuery('.ol-control').hide();
-                    jQuery('.ol-attribution').show();
-                } else {
-                    jQuery('#header_top').show();
-                    jQuery('#header_side').show();
-                    jQuery('#splitter').show();
-                    jQuery('#tabs').show();
-                    jQuery('#filterButton').show();
-                    jQuery('.ol-control').show();
-                    jQuery('#expand_sidebar_control').hide();
-                    toggles['sidebar_visible'].restore();
-                    TAR.altitudeChart.render();
-                }
                 hideButtons = !hideButtons;
+                showHideButtons();
                 break;
             case "f":
                 toggleFollow();
@@ -3361,7 +3382,7 @@ function refreshSelected() {
             else {
                 jQuery('#selected_lookup').html('<a class="text-white text-decoration-none" href="https://www.google.com/search?q=' + selected.registration + ' aircraft" target="_new" rel="nofollow">Google<sup><i class="bi bi-box-arrow-up-right ps-1"></i></sup></a>');
             }
-        } 
+        }
         else {
             jQuery('#selected_registration').html("N/A");
             jQuery('#selected_lookup').html('');
@@ -3603,7 +3624,7 @@ function refreshSelected() {
     } else {
         jQuery('#selected_nav_qnh').updateText(selected.nav_qnh.toFixed(1) + " hPa");
     }
-    jQuery('#selected_nav_altitude').html(format_altitude_long(selected.nav_altitude, 0, DisplayUnits));
+    jQuery('#selected_nav_altitude').hex_html(format_altitude_long(selected.nav_altitude, 0, DisplayUnits));
     jQuery('#selected_nav_heading').updateText(format_track_brief(selected.nav_heading));
     if (selected.nav_modes == null) {
         jQuery('#selected_nav_modes').updateText("n/a");
@@ -4109,7 +4130,6 @@ function refreshFeatures() {
 
         let inTable = []; // list of planes that will actually be displayed in the table
 
-
 //Plane Table Options
 
         ctime && console.time("modTRs");
@@ -4136,6 +4156,7 @@ function refreshFeatures() {
                 
                 if (plane.dataSource && plane.dataSource in colors)
                     bgColor = colors[plane.dataSource];
+
                 if (plane.dataSource) {
                     switch (plane.dataSource) {
                         case 'mlat':
@@ -4249,27 +4270,6 @@ function refreshFeatures() {
                     }
                 }
 
-                
-                if (plane.squawk in tableColors.special) {
-                    bgColor = tableColors.special[plane.squawk];
-                    plane.bgColorCache = bgColor;
-                   // plane.tr.style = "background-color: " + bgColor + "; color: black;";
-                } else if (plane.bgColorCache != bgColor) {
-                    plane.bgColorCache = bgColor;
-                   // plane.tr.style = "background-color: " + bgColor + ";";
-                }
-
-                for (let cell in activeCols) {
-                    let col = activeCols[cell];
-                    if (!col.value)
-                        continue;
-                    let newValue = col.value(plane);
-                    if (newValue != plane.trCache[cell]) {
-                        plane.trCache[cell] = newValue;
-                        plane.tr.cells[cell].innerHTML = newValue;
-                    }
-                }
-
                 if (plane.selected) {
                     colors = tableColors.selected;
                     jQuery('#'+plane.icao).removeClass('border');
@@ -4294,6 +4294,29 @@ function refreshFeatures() {
                         }
                         if (plane.squawk == '7700') {
                             jQuery('#'+plane.icao).addClass('border border-danger border-4');
+                        }
+                    }
+                }
+
+
+                if (plane.squawk in tableColors.special) {
+                    bgColor = tableColors.special[plane.squawk];
+                    plane.bgColorCache = bgColor;
+                    //plane.tr.style = "background-color: " + bgColor + "; color: black;";
+                } else if (plane.bgColorCache != bgColor) {
+                    plane.bgColorCache = bgColor;
+                    //plane.tr.style = "background-color: " + bgColor + ";";
+                }
+
+                for (let cell in activeCols) {
+                    let col = activeCols[cell];
+                    if (!col.value)
+                        continue;
+                    let newValue = col.value(plane);
+                    if (newValue != plane.trCache[cell]) {
+                        plane.trCache[cell] = newValue;
+                        if (col.html) {
+                            plane.tr.cells[cell].innerHTML = newValue;
                         }
                     }
                 }
@@ -6813,6 +6836,9 @@ function setLineWidth() {
 }
 let lastCallLocationChange = 0;
 function onLocationChange(position) {
+    if (SiteOverride) {
+        return;
+    }
     lastCallLocationChange = new Date().getTime();
     changeCenter();
     const moveMap = (Math.abs(SiteLat - CenterLat) < 0.000001 && Math.abs(SiteLon - CenterLon) < 0.000001);

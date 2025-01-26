@@ -274,21 +274,26 @@ function format_vert_rate_brief(rate, displayUnits) {
 // rate in ft/min
 function format_vert_rate_long(rate, displayUnits) {
 	if (rate == null){
-		return "n/a";
+		return "N/A";
 	}
-
-	let rate_text = convert_vert_rate(rate, displayUnits).toFixed(displayUnits === "metric" ? 1 : 0) + NNBSP + get_unit_label("verticalRate", displayUnits);
-
+    let converted = convert_vert_rate(rate, displayUnits);
+	let rate_text = converted[1]+Math.abs(converted[0].toFixed(displayUnits === "metric" ? 1 : 0)) + NNBSP + get_unit_label("verticalRate", displayUnits);
 	return rate_text;
 }
 
 // rate in ft/min
 function convert_vert_rate(rate, displayUnits) {
-	if (displayUnits === "metric") {
-		return (rate / 196.85); // ft/min to m/s
+    let icon = '';
+    if (rate < 0) {
+        icon = '<i class="bi bi-arrow-down"></i>';
+    }
+    if (rate > 0) {
+        icon = '<i class="bi bi-arrow-up"></i>';
+    }
+    if (displayUnits === "metric") {
+		return [(rate / 196.85), icon]; // ft/min to m/s
 	}
-
-	return rate;
+	return [rate, icon];
 }
 
 // p is a [lon, lat] coordinate

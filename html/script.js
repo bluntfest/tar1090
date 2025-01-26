@@ -3531,9 +3531,9 @@ function refreshSelected() {
     jQuery('#selected_speed2').updateText(format_speed_long(selected.gs, DisplayUnits));
     jQuery('#selected_ias').updateText(format_speed_long(selected.ias, DisplayUnits));
     jQuery('#selected_tas').updateText(format_speed_long(selected.tas, DisplayUnits));
-    jQuery('#selected_vert_rate').updateText(format_vert_rate_long(selected.vert_rate, DisplayUnits));
-    jQuery('#selected_baro_rate').updateText(format_vert_rate_long(selected.baro_rate, DisplayUnits));
-    jQuery('#selected_geom_rate').updateText(format_vert_rate_long(selected.geom_rate, DisplayUnits));
+    jQuery('#selected_vert_rate').html(format_vert_rate_long(selected.vert_rate, DisplayUnits));
+    jQuery('#selected_baro_rate').html(format_vert_rate_long(selected.baro_rate, DisplayUnits));
+    jQuery('#selected_geom_rate').html(format_vert_rate_long(selected.geom_rate, DisplayUnits));
 
     setSelectedIcao();
 
@@ -3616,7 +3616,7 @@ function refreshSelected() {
     } else {
         jQuery('#selected_trackrate').updateText(selected.track_rate.toFixed(2));
     }
-    jQuery('#selected_geom_rate').updateText(format_vert_rate_long(selected.geom_rate, DisplayUnits));
+    jQuery('#selected_geom_rate').html(format_vert_rate_long(selected.geom_rate, DisplayUnits));
     if (selected.nav_qnh == null) {
         jQuery('#selected_nav_qnh').updateText("N/A");
     } else {
@@ -3918,7 +3918,7 @@ function refreshFeatures() {
     cols.vert_rate = {
         text: 'Vertical Rate',
         sort: function () { sortBy('vert_rate', compareNumeric, function(x) { return x.vert_rate; }); },
-        value: function(plane) { return format_vert_rate_brief(plane.vert_rate, DisplayUnits); },
+        value: function(plane) { return format_vert_rate_long(plane.vert_rate, DisplayUnits); },
         align: 'right',
         header: function () { return 'V. Rate(' + get_unit_label("verticalRate", DisplayUnits) + ')';},
     };
@@ -4130,6 +4130,28 @@ function refreshFeatures() {
 
 //Plane Table Options
 
+        function remove_colors(id) {
+            jQuery('#'+id).removeClass('border');
+            jQuery('#'+id).removeClass('border-4');
+            jQuery('#'+id).removeClass('border-danger');
+            jQuery('#'+id).removeClass('border-primary');
+            jQuery('#'+id).removeClass('border-success');
+            jQuery('#'+id).removeClass('border-warning');
+            jQuery('#'+id).removeClass('table-primary');
+            jQuery('#'+id).removeClass('table-success');
+            jQuery('#'+id).removeClass('table-warning');
+        }
+
+        function remove_borders(id) {
+            jQuery('#'+id).removeClass('border');
+            jQuery('#'+id).removeClass('border-4');
+            jQuery('#'+id).removeClass('border-danger');
+            jQuery('#'+id).removeClass('border-primary');
+            jQuery('#'+id).removeClass('border-success');
+            jQuery('#'+id).removeClass('border-warning');
+            jQuery('#'+id).removeClass('border-white');
+        }
+
         ctime && console.time("modTRs");
         for (let i in pList) {
             const plane = pList[i];
@@ -4157,110 +4179,132 @@ function refreshFeatures() {
                 if (plane.dataSource) {
                     switch (plane.dataSource) {
                         case 'mlat':
-                            jQuery('#'+plane.icao).addClass('table-warning border');
+                            remove_colors(plane.icao);
+                            jQuery('#'+plane.icao).addClass('table-warning border border-warning');
                             if (plane.military) {
-                                jQuery('#'+plane.icao).removeClass('border-warning');
+                                remove_borders(plane.icao);
                                 jQuery('#'+plane.icao).addClass('border border-success border-4');
                             }
                             if (plane.squawk) {
                                 if (plane.squawk == '7500') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                                 if (plane.squawk == '7600') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                                 if (plane.squawk == '7700') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                             }
                             break;
                         case 'modeS':
+                            remove_colors(plane.icao);
                             jQuery('#'+plane.icao).addClass('table-primary border border-primary');
                             if (plane.military) {
+                                remove_borders(plane.icao);
                                 jQuery('#'+plane.icao).addClass('border border-success border-4');
                             }
                             if (plane.squawk) {
                                 if (plane.squawk == '7500') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                                 if (plane.squawk == '7600') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                                 if (plane.squawk == '7700') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                             }
                             break;
                         case 'adsr':
+                            remove_colors(plane.icao);
                             jQuery('#'+plane.icao).addClass('table-success border border-success');
                             if (plane.military) {
+                                remove_borders(plane.icao);
                                 jQuery('#'+plane.icao).addClass('border border-success border-4');
                             }
                             if (plane.squawk) {
                                 if (plane.squawk == '7500') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                                 if (plane.squawk == '7600') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                                 if (plane.squawk == '7700') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                             }
                             break;
                         case 'adsc':
+                            remove_colors(plane.icao);
                             jQuery('#'+plane.icao).addClass('table-success border border-success');
                             if (plane.military) {
+                                remove_borders(plane.icao);
                                 jQuery('#'+plane.icao).addClass('border border-success border-4');
                             }
                             if (plane.squawk) {
                                 if (plane.squawk == '7500') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                                 if (plane.squawk == '7600') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                                 if (plane.squawk == '7700') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                             }
                             break;
                         case 'tisb':
+                            remove_colors(plane.icao);
                             jQuery('#'+plane.icao).addClass('table-success border border-success');
                             if (plane.military) {
+                                remove_borders(plane.icao);
                                 jQuery('#'+plane.icao).addClass('border border-success border-4');
                             }
                             if (plane.squawk) {
                                 if (plane.squawk == '7500') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                                 if (plane.squawk == '7600') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                                 if (plane.squawk == '7700') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                             }
                             break;
                         default:
-                            jQuery('#'+plane.icao).removeClass('border');
-                            jQuery('#'+plane.icao).removeClass('table-primary');
-                            jQuery('#'+plane.icao).removeClass('border-primary');
-                            jQuery('#'+plane.icao).removeClass('table-success border border-success');
-                            jQuery('#'+plane.icao).removeClass('border-success');
-                            jQuery('#'+plane.icao).removeClass('table-warning border border-warning');
-                            jQuery('#'+plane.icao).removeClass('border-warning');
+                            remove_colors(plane.icao);
                             if (plane.military) {
+                                remove_borders(plane.icao);
                                 jQuery('#'+plane.icao).addClass('border border-success border-4');
                             }
                             if (plane.squawk) {
                                 if (plane.squawk == '7500') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                                 if (plane.squawk == '7600') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                                 if (plane.squawk == '7700') {
+                                    remove_borders(plane.icao);
                                     jQuery('#'+plane.icao).addClass('border border-danger border-4');
                                 }
                             }
@@ -4279,16 +4323,11 @@ function refreshFeatures() {
 
                 if (plane.selected) {
                     colors = tableColors.selected;
-                    jQuery('#'+plane.icao).removeClass('border');
-                    jQuery('#'+plane.icao).removeClass('border-primary');
-                    jQuery('#'+plane.icao).removeClass('border-success');
-                    jQuery('#'+plane.icao).removeClass('border-warning');
+                    remove_borders(plane.icao);
                     jQuery('#'+plane.icao).addClass('border border-white border-4');
                 }
                 else {
-                    jQuery('#'+plane.icao).removeClass('border');
-                    jQuery('#'+plane.icao).removeClass('border-white');
-                    jQuery('#'+plane.icao).removeClass('border-4');
+                    remove_borders(plane.icao);
                     if (plane.military) {
                         jQuery('#'+plane.icao).addClass('border border-success border-4');
                     }

@@ -282,7 +282,7 @@ select {
 #loader_progress { width:  100%; height: 100%; position: absolute; }
 
 
-.aircraft_table_header {
+/*.aircraft_table_header {
     background-color: var(--ACCENT);
     color: #FFFFFF;
     cursor: pointer;
@@ -297,7 +297,7 @@ select {
     font-size: smaller;
     padding: calc( 5px * var(--SCALE));
     text-align: center;
-}
+}*/
 
 .verticalRateTriangle {
     font-family: "Courier New",monospace;

@@ -189,6 +189,7 @@ let showingReplayBar = false;
 ///////////////////////////////////////////////////////////////////
 //Custom Shit
 let cpd = ['AC9C37', 'AC9C9F', 'AC9CAF', 'AC9CB1', 'AC9CB0'];
+let cfd = ['A9076F'];
 let dhs = ['A19F67'];
 let feds = ['A0FDE0', 'A05181', 'A8657E'];
 let isp = ['A2FACF', 'A704C0', 'A84311', 'A8B98E', 'AA6E5C', 'AC232A'];
@@ -197,6 +198,9 @@ let reg_warning = '';
 function check_for_warning(hex) {
     if (cpd.indexOf(hex) !==-1) {
         reg_warning = '<br /><strong style="color: red;">Chicago Police Department</strong><br />';
+    }
+    else if (cfd.indexOf(hex) !==-1) {
+        reg_warning = '<br /><strong style="color: red;">Chicago Fire Department</strong><br />';
     }
     else if (dhs.indexOf(hex) !==-1) {
         reg_warning = '<br /><strong style="color: red;">Department of Homeland Security</strong><br />';
@@ -1179,13 +1183,13 @@ function earlyInitPage() {
         buttonActive('#P', noVanish);
     }
 
-    jQuery('#tabs').tabs({
+    /*jQuery('#tabs').tabs({
         active: loStore['active_tab'],
         activate: function (event, ui) {
             loStore['active_tab'] = jQuery("#tabs").tabs("option", "active");
         },
         collapsible: true
-    });
+    });*/
 
     // Set page basics
     document.title = 'Live Airplane Tracking Radar | Airport-Frequencies.com';
@@ -4036,7 +4040,7 @@ function refreshFeatures() {
         }
         let table = '';
         table += '<thead class="aircraft_table_header">';
-        table += '  <tr>';
+        table += '  <tr class="text-center">';
         for (let i in activeCols) {
             let col = activeCols[i];
             table += '<td id="' + col.id + '" onclick="TAR.planeMan.cols.' + col.id + '.sort();"' + col.hStyle + '>'+ col.header() +'</td>';
